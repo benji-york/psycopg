@@ -21,6 +21,13 @@ shift
 tmpdir=$(mktemp -d)
 trap "rm -r ${tmpdir}" EXIT
 
-unzip -d "${tmpdir}" "${wheel}"
-find "${tmpdir}" -name \*.so | xargs strip "$@"
-(cd "${tmpdir}" && zip -fr ${wheel} *)
+cd "${tmpdir}"
+python -m zipfile -e "${wheel}" .
+
+find . -name *.so -ls -exec strip "$@" {} \;
+# Display the size after strip
+find . -name *.so -ls
+
+python -m zipfile -c ${wheel} *
+
+cd -
