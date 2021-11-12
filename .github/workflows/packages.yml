@@ -1,7 +1,9 @@
 name: Build packages
 
 on:
-  workflow_dispatch:
+  # NOMERGE
+  # workflow_dispatch:
+  push:
 
 jobs:
 
@@ -199,7 +201,10 @@ jobs:
       matrix:
         # Might want to add win32, untested at the moment.
         arch: [win_amd64]
-        pyver: [cp36, cp37, cp38, cp39, cp310]
+        # NOMERGE
+        # pyver: [cp36, cp37, cp38, cp39, cp310]
+        pyver: [cp38]
+
 
     steps:
       - uses: actions/checkout@v2
